@@ -48,4 +48,10 @@ public class EventoService {
                 return repository.save(eventoExistente);
             }).map(EventoDTO::toDto);
     }
+
+    public Flux<EventoDTO> obterPorTipo(String tipo) {
+        TipoEvento tipoEvento = TipoEvento.valueOf(tipo.toUpperCase());
+        return repository.findByTipo(tipoEvento)
+                .map(EventoDTO::toDto);
+    }
 }
