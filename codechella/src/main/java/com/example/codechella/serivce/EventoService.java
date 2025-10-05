@@ -1,17 +1,13 @@
 package com.example.codechella.serivce;
 
-import com.example.codechella.models.Evento;
-import com.example.codechella.models.EventoDTO;
-import com.example.codechella.models.TipoEvento;
+import com.example.codechella.models.evento.EventoDTO;
+import com.example.codechella.models.evento.TipoEvento;
 import com.example.codechella.repository.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.time.LocalDate;
 
 public class EventoService {
     @Autowired

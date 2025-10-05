@@ -1,9 +1,7 @@
-package com.example.codechella.controller;
+package com.example.codechella.controller.evento;
 
-import com.example.codechella.models.EventoDTO;
-import com.example.codechella.repository.EventoRepository;
+import com.example.codechella.models.evento.EventoDTO;
 import com.example.codechella.serivce.EventoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -30,13 +28,13 @@ public class EventoControler {
         return service.listarTodos();
     }
 
-    @GetMapping(value = "/categoria/{tipo}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "/evento/categoria/{tipo}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<EventoDTO> obterPorTipo(@PathVariable String tipo){
         return Flux.merge(service.obterPorTipo(tipo), eventoSink.asFlux())
                 .delayElements(Duration.ofSeconds(4));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/evento/{id}")
     public Mono<EventoDTO> buscarPorId(@PathVariable Long id){
         return service.buscarPorId(id);
     }
@@ -47,12 +45,12 @@ public class EventoControler {
                 .doOnSuccess( e -> eventoSink.tryEmitNext(e));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/evento/{id}")
     public Mono<Void> excluir(@PathVariable Long id){
         return service.excluir(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/evento/{id}")
     public Mono<EventoDTO> atualizar(@PathVariable Long id, @RequestBody EventoDTO dto){
         return service.atualizarId(id, dto);
     }

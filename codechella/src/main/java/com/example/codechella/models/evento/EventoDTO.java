@@ -1,4 +1,4 @@
-package com.example.codechella.models;
+package com.example.codechella.models.evento;
 
 import java.time.LocalDate;
 

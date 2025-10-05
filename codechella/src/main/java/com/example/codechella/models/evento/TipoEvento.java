@@ -1,4 +1,4 @@
-package com.example.codechella.models;
+package com.example.codechella.models.evento;
 
 public enum TipoEvento {
 

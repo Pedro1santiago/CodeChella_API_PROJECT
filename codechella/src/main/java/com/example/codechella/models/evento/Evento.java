@@ -1,4 +1,4 @@
-package com.example.codechella.models;
+package com.example.codechella.models.evento;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
@@ -35,7 +35,7 @@ public class Evento {
     public String getDescricao() {
         return descricao;
     }
-
+ 
     // Setters
     public void setId(Long id) {
         this.id = id;
