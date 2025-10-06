@@ -1,4 +1,4 @@
-package com.example.codechella.serivce;
+package com.example.codechella.serivce.ingressoService;
 
 import com.example.codechella.models.ingresso.IngressoDTO;
 import com.example.codechella.models.ingresso.TipoStatus;
@@ -20,7 +20,7 @@ public class IngressoService {
         return repository.save(ingresso).map(IngressoDTO::toDTO);
     }
 
-    public Flux<IngressoDTO> listartodos() {
+    public Flux<IngressoDTO> listarTodos() {
         return repository.findAll().map(IngressoDTO::toDTO);
     }
 
@@ -54,4 +54,5 @@ public class IngressoService {
 
 
     }
+
 }

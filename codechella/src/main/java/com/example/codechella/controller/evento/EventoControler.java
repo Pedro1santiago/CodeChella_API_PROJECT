@@ -1,7 +1,8 @@
 package com.example.codechella.controller.evento;
 
 import com.example.codechella.models.evento.EventoDTO;
-import com.example.codechella.serivce.EventoService;
+import com.example.codechella.models.users.UserAdmin;
+import com.example.codechella.serivce.eventoService.EventoService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -40,19 +41,19 @@ public class EventoControler {
     }
 
     @PostMapping()
-    public Mono<EventoDTO> cadastrar(@RequestBody EventoDTO dto){
-        return service.cadastrarEvento(dto)
+    public Mono<EventoDTO> cadastrar(@RequestParam UserAdmin usuarioAmin, @RequestBody EventoDTO dto){
+        return service.cadastrarEvento(usuarioAmin,dto)
                 .doOnSuccess( e -> eventoSink.tryEmitNext(e));
     }
 
     @DeleteMapping("/evento/{id}")
-    public Mono<Void> excluir(@PathVariable Long id){
-        return service.excluir(id);
+    public Mono<Void> excluir(@PathVariable Long id, @RequestParam UserAdmin usuarioAmin){
+        return service.excluir(id, usuarioAmin);
     }
 
     @PutMapping("/evento/{id}")
-    public Mono<EventoDTO> atualizar(@PathVariable Long id, @RequestBody EventoDTO dto){
-        return service.atualizarId(id, dto);
+    public Mono<EventoDTO> atualizar(@PathVariable Long id, @RequestBody EventoDTO dto, @RequestParam UserAdmin usuarioAmin){
+        return service.atualizarId(id, dto, usuarioAmin);
     }
 
 }

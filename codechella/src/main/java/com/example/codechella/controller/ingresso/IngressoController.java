@@ -2,7 +2,7 @@ package com.example.codechella.controller.ingresso;
 
 
 import com.example.codechella.models.ingresso.IngressoDTO;
-import com.example.codechella.serivce.IngressoService;
+import com.example.codechella.serivce.ingressoService.IngressoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ public class IngressoController {
 
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<IngressoDTO> listarIngressos() {
-        return ingressoService.listartodos();
+        return ingressoService.listarTodos();
     }
 
     @PostMapping("/comprar")
