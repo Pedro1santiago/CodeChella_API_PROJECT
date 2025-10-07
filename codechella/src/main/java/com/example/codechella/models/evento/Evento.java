@@ -14,6 +14,7 @@ public class Evento {
     private String nome;
     private LocalDate data;
     private String descricao;
+    private StatusEvento statusEvento;
 
     // Getters
     public Long getId() {
@@ -56,4 +57,7 @@ public class Evento {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public StatusEvento getStatusEvento(){return statusEvento;}
+    public void setStatusEvento(StatusEvento statusEvento){this.statusEvento = statusEvento;}
 }

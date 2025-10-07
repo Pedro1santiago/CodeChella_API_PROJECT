@@ -4,7 +4,7 @@ import com.example.codechella.models.evento.EventoDTO;
 import com.example.codechella.models.ingresso.IngressoDTO;
 import com.example.codechella.models.users.CadastroEventoRequest;
 import com.example.codechella.models.users.UserAdmin;
-import com.example.codechella.models.users.UsuarioDTO;
+import com.example.codechella.models.users.UsuarioAdminDTO;
 import com.example.codechella.serivce.eventoService.EventoService;
 import com.example.codechella.serivce.ingressoService.IngressoService;
 import com.example.codechella.serivce.usuarioAdmin.UsuarioAdminService;
@@ -37,7 +37,7 @@ public class UsuarioAdminController {
     }
 
     @GetMapping("/listarTodos/usuarios")
-    public Flux<UsuarioDTO> listarUsuarios(){
+    public Flux<UsuarioAdminDTO> listarUsuarios(){
         return usuarioAdminService.listarTodos();
     }
 

@@ -1,6 +1,7 @@
 package com.example.codechella.serivce.eventoService;
 
 import com.example.codechella.models.evento.EventoDTO;
+import com.example.codechella.models.evento.StatusEvento;
 import com.example.codechella.models.evento.TipoEvento;
 import com.example.codechella.models.users.TipoUsuario;
 import com.example.codechella.models.users.UserAdmin;
@@ -35,15 +36,22 @@ public class EventoService {
 
     public Mono<EventoDTO> cadastrarEvento(UserAdmin userAdmin, EventoDTO dto) {
          verificaUser(userAdmin);
+         var evento = dto.toEntity();
+         evento.setStatusEvento(StatusEvento.ABERTO);
+
             return repository.save(dto.toEntity()).map(EventoDTO::toDto);
     }
 
 
-    public Mono<Void> excluir(Long id, UserAdmin userAdmin) {
+    public Mono<EventoDTO> cancelarEvento(Long id, UserAdmin userAdmin) {
         verificaUser(userAdmin);
         return repository.findById(id)
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
-                .flatMap(repository::delete);
+                .flatMap(evento -> {
+                    evento.setStatusEvento(StatusEvento.FECHADO);
+                    return repository.save(evento);
+                })
+                .map(EventoDTO::toDto);
     }
 
     public Mono<EventoDTO> atualizarId(Long id, EventoDTO dto, UserAdmin userAdmin){
